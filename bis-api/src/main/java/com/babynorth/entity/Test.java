@@ -6,6 +6,6 @@ package com.babynorth.entity;
 public class Test {
 
     public static void main(String[] args) {
-        System.out.println("tt1");
+        System.out.println("tt1如意大傻逼");
     }
 }
