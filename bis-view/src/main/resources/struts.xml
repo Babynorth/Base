@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	"http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    <!-- 定义了当前 Struts2 应用可以接受的请求的扩展名
+    <constant name="struts.action.extension" value="do,action"></constant>-->
+    <!--打开允许动态方法调用的开关, 默认是 false -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+    <!--设置开发模式-->
+	<constant name="struts.devMode" value="true" />
+	<!--该属性指定视图标签默认的视图主题,该属性的默认值是 xhtml -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- 最大上传200M 单位B -->
+	<constant name="struts.multipart.maxSize" value="209715200" />
+	<constant name="struts.codebehind.pathPrefix" value="/WEB-INF/jsp/" />
+	<constant name="struts.enable.SlashesInActionNames" value="true" />
+    <!--设置编码方式-->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<constant name="struts.i18n.reload" value="true"></constant>
+	<constant name="struts.custom.i18n.resources" value="resource-operateLog,ApplicationResources,errors" />
+	<constant name="struts.action.excludePattern" value="/ReportServer,/ReportServer/.*" />
+    <!--name:必须存在，作为其它包应用本包的标记； extends：可有可无 设置本包继承其它包；namespace：可有可无 设置包的命名空间默认为""-->
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor-stack name="crudStack">
+				<interceptor-ref name="timeoutInterceptor" />
+				<interceptor-ref name="paramsPrepareParamsStack"/>
+                <!--覆盖defultStack中的exception设置，启用日志功能 -->
+				<interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">ERROR</param>
+				</interceptor-ref>
+
+				<interceptor-ref name="exceptionInterceptor" />
+			</interceptor-stack>
+
+			<interceptor name="exceptionInterceptor"
+				class="com.babynorth.interceptor.ExceptionInterceptor" />
+			<interceptor name="timeoutInterceptor"
+				class="com.babynorth.interceptor.TimeoutInterceptor" />
+			<!--<interceptor name="PrepareMenuInterceptor" class="prepareMenuInterceptor" />-->
+		</interceptors>
+
+        <!--该标签用来设置整个包范围内所有Action所要应用的默认拦截器信息-->
+		<default-interceptor-ref name="crudStack" />
+
+		<!-- 全局结果定义 -->
+		<global-results>
+			<result name="error">/common/error/error.jsp</result>
+		</global-results>
+
+		<!-- 全局异常定义 -->
+		<global-exception-mappings>
+            <!--name:可有可无，用来表示该异常配置信息；result：必须存在，指定发生异常时显示的视图信息,这里要配置为逻辑视图；exception：必须存在，指定异常类型-->
+			<exception-mapping result="error"
+				exception="com.babynorth.exception.DAOException"></exception-mapping>
+			<exception-mapping result="error"
+				exception="com.babynorth.exception..BusinessServiceException"></exception-mapping>
+			<exception-mapping result="error" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>
+
+        <!--name:必须存在，请求Action的名称 class：可有可无，Action处理类对应具体路径 method:可有可无，指定Action中的方法名, 默认为execute-->
+		<!--<action name="redirectAction" class="com.babynorth.action.RedirectAction" method="redirect">
+
+        </action>-->
+	</package>
+</struts>
