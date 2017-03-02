@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <!--通过注解注入进行扫描， 当用context:component-scan 的时候 context:annotation-config可以省略-->
+    <context:annotation-config/>
+
+    <!--扫描这下边所有的包被spring管理 -->
+    <context:component-scan base-package="com.babynorth.base">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--使用PropertyPlaceholderConfigurer类载入外部配置 即通过读取properties文件配置注入到bean中-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <!--从jvm虚拟机的参数中获得配置信息-->
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="ignoreResourceNotFound" value="true" />
+        <!--指向外部配置文件的地址 多个配置文件用list-->
+        <property name="locations">
+            <list>
+                <value>classpath:appconfig.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!--导入其他配置文件-->
+    <import resource="applicationContext-base.xml"></import>
+
+</beans>
