@@ -6,11 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    <a href="${baseUrl}/test!test">Test</a>
-</body>
-</html>
+<%
+    String url = request.getContextPath() + "/login/login!main.action";
+    response.sendRedirect(url);
+%>

@@ -58,7 +58,7 @@
         </property>-->
     </bean>
 
-    <!-- 业务类中的@Transaction注解进行驱动 -->
+    <!-- 业务类中的@Transaction注解进行驱动 即支持事务注解-->
     <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!-- 配置事务管理器 指定其作用的sessionFactory把事务交给Spring去处理 -->
