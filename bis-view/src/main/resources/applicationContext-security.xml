@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns:security="http://www.springframework.org/schema/security"
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security
+                        http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <!--login-page=”/login” – 用于显示自定义登录表单的页面
+        authentication-failure-url=”/login?error” – 如果验证失败，则将转向URL：/login?error
+        logout-success-url=”/login?logout” –如果登录成功，则将转向URL：/logout
+        username-parameter=”username” – 请求包含“username”的名字。在HTML中，这是在输入文本的名称。
+    -->
+
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/home" access="ROLE_USER" />
+        <security:intercept-url pattern="/login**" access="ROLE_ADMIN" />
+        <security:form-login
+                login-page="/login"
+                default-target-url="/test.test"
+                authentication-failure-url="/login?error"
+                username-parameter="username"
+                password-parameter="password"
+                authentication-success-handler-ref="customSuccessHandler"
+                />
+
+        <!-- <security:logout logout-success-url="/login?logout" />-->
+        <!-- enable csrf protection -->
+        <!--  <security:csrf/>-->
+    </security:http>
+
+    <!--静态用户-->
+    <!--<security:authentication-manager>
+         <security:authentication-provider>
+             <security:user-service>
+                 <security:user name="yiibai"  password="123456"  authorities="ROLE_USER" />
+                 <security:user name="admin" password="123456" authorities="ROLE_ADMIN,ROLE_USER" />
+             </security:user-service>
+         </security:authentication-provider>
+     </security:authentication-manager>-->
+    <!--基于角色登录  authentication-success-handler-ref="customSuccessHandler" 放在form-login里-->
+    <!--<bean id="customSuccessHandler" class="com.babynorth.security.config.CustomSuccessHandler" ></bean>-->
+
+    <!--动态用户-->
+    <security:authentication-manager >
+        <security:authentication-provider user-service-ref="customUserDetailsService"/>
+    </security:authentication-manager>
+    <bean id="customUserDetailsService" class="com.babynorth.security.CustomUserDetailsService" ></bean>
+    <!--基于角色登录  authentication-success-handler-ref="customSuccessHandler" 放在form-login里-->
+    <bean id="customSuccessHandler" class="com.babynorth.security.CustomSuccessHandler" ></bean>
+</beans>
