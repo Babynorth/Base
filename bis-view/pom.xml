@@ -154,6 +154,13 @@
             <version>1.2</version>
         </dependency>
 
+        <!--母版页jar包-->
+        <dependency>
+            <groupId>com.thinvent.framework</groupId>
+            <artifactId>sitemesh</artifactId>
+            <version>1.2.1</version>
+        </dependency>
+
     </dependencies>
 
 

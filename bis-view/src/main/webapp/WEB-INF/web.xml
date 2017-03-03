@@ -56,6 +56,15 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 
+    <!--母版页控制-->
+    <filter>
+        <filter-name>sitemesh</filter-name>
+        <filter-class>org.sitemesh.config.ConfigurableSiteMeshFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>sitemesh</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <filter>
         <filter-name>struts2</filter-name>
