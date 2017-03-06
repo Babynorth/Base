@@ -6,16 +6,16 @@
     <title>用户登录</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/login.css" />
-    <script type="text/javascript" src="${baseUrl }/common/js/jquery.min.js" charset="utf-8"></script>
+   <%-- <script type="text/javascript" src="${baseUrl }/common/js/jquery.min.js" charset="utf-8"></script>
    <script type="text/javascript" src="${baseUrl }/common/js/jquery.easyui.min.js" charset="utf-8"></script>
 
    <script type="text/javascript" src="${baseUrl }/common/js/login.js" charset="utf-8"></script>
-   <script type="text/javascript" src="${baseUrl }/common/js/extJs.js" charset="utf-8"></script>
+   <script type="text/javascript" src="${baseUrl }/common/js/extJs.js" charset="utf-8"></script>--%>
 </head>
-<body onkeydown="enterlogin();">
+<body>
 <div class="top_div"></div>
 <div class="first_div" >
-    <form method="post" id="loginform">
+    <form method="post" id="loginform" action="${baseUrl}/j_spring_security_check">
         <div class="second_div">
             <div class="tou"></div>
             <div class="initial_left_hand" id="left_hand"></div>
@@ -36,7 +36,7 @@
                 </span>
                 <span class="span_right">
                     <a class="span_right_first_a" href="javascript:;">注册</a>
-                    <a class="span_right_second_a" href="javascript:;" onclick="submitForm()">登录</a>
+                    <input name="submit" class="span_right_second_a" type="submit"  value="登录" />
                 </span>
             </P>
         </div>

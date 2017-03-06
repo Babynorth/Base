@@ -6,6 +6,7 @@ package com.babynorth.base.action.login;
 public class LoginAction {
 
     public String main() {
+        System.out.println("testLogin");
         return "login";
     }
 }
