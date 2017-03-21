@@ -23,7 +23,7 @@
         </div>
         <P class="first_p">
             <span class="u_logo"></span>
-            <input class="ipt" type="text" name="j_username" placeholder="请输入用户名或邮箱" value="" />
+            <input class="ipt" type="text" name="j_username" placeholder="请输入用户名或邮箱" value="123456" />
         </P>
         <P class="second_p">
             <span class="p_logo"></span>
