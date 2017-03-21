@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.hibernate:hibernate-ehcache:3.3.1.GA">
+    <CLASSES>
+      <root url="jar:///Library/software/maven/repository/org/hibernate/hibernate-ehcache/3.3.1.GA/hibernate-ehcache-3.3.1.GA.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar:///Library/software/maven/repository/org/hibernate/hibernate-ehcache/3.3.1.GA/hibernate-ehcache-3.3.1.GA-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar:///Library/software/maven/repository/org/hibernate/hibernate-ehcache/3.3.1.GA/hibernate-ehcache-3.3.1.GA-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

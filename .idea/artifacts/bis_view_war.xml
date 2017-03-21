@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bis-view:war">
+    <output-path>$PROJECT_DIR$/bis-view/target</output-path>
+    <root id="archive" name="bis-view-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="bis-view:war exploded" />
+    </root>
+  </artifact>
+</component>

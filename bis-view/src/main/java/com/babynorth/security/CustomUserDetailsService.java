@@ -1,5 +1,7 @@
 package com.babynorth.security;
 
+import com.babynorth.util.StringUtil;
+import com.google.common.collect.Lists;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,62 +19,48 @@ import java.util.*;
 public class CustomUserDetailsService implements UserDetailsService {
 
 
-    @Transactional(readOnly=true)
     public UserDetails loadUserByUsername(String userName)
             throws UsernameNotFoundException {
 
-       Map<Object,Object> map =  getMapData();
-        Set<Role> roleList = (Set<Role>)map.get("roleList");
-        Set<User> userList = (Set<User>) map.get("userList");
+        System.out.println(userName);
 
-        Iterator<User> it = userList.iterator();
-        User user = it.next();
-        if(user==null){
-            System.out.println("User not found");
-            throw new UsernameNotFoundException("Username not found");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getId(), user.getPassword(),
-                true, true, true, true, getGrantedAuthorities(user,userName));
+
+        List<Role> roleList = new ArrayList<>();
+
+        Role role = new Role();
+        role.setId("1");
+        role.setType("ROLE_ADMIN");
+        roleList.add(role);
+
+        Role role1 = new Role();
+        role1.setId("2");
+        role1.setType("ROLE_USER");
+        roleList.add(role);
+
+        User user = new User("1","123456","zhengbei","791151858@qq.com",roleList);
+        List<GrantedAuthority> authorityList = getGrantedAuthorities(roleList);
+
+        user.setAuthosList(authorityList);
+
+
+        return user;
+
     }
 
 
-    private List<GrantedAuthority> getGrantedAuthorities(User user,String userName){
+    /**
+     * 用户所拥有的权限
+     * @return
+     */
+    private List<GrantedAuthority> getGrantedAuthorities( List<Role> roleList){
         List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-        if(user.getName().equals(userName)) {
-            for(Role role : user.getRoleList()){
-                authorities.add(new SimpleGrantedAuthority(role.getType()));
-            }
+        for (Role ro : roleList) {
+            // 用户可以访问的资源名称（或者说用户所拥有的权限） 注意：必须"ROLE_"开头
+            authorities.add(new SimpleGrantedAuthority(ro.getType()));
         }
-        System.out.print("authorities :"+authorities);
         return authorities;
     }
 
 
-    private Map<Object,Object> getMapData() {
-
-        Map<Object,Object> map = new HashMap<>();
-
-        Set<Role> roleList = new HashSet<>();
-        Set<User> userList = new HashSet<>();
-
-        User user = new User();
-        Role role = new Role();
-
-        user.setId("1");
-        user.setPassword("123456");
-        user.setEmail("791151858@qq.com");
-        user.setName("zhengbei");
-        user.setRoleList(roleList);
-        userList.add(user);
-
-        role.setId("1");
-        role.setType("ROLE_ADMIN");
-        role.setUserList(userList);
-        roleList.add(role);
-
-        map.put("roleList",roleList);
-        map.put("userList",userList);
-        return map;
-    }
 }

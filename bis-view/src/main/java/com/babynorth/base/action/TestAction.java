@@ -12,4 +12,8 @@ public class TestAction extends BaseAction {
     public String test() throws Exception {
         return "success";
     }
+
+    public String testAcess() throws Exception {
+        return "success";
+    }
 }

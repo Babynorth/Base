@@ -1,6 +1,8 @@
 package com.babynorth.security;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -10,16 +12,21 @@ public class Role {
 
     private String id;
     private String type;
-    private Set<User> userList = new HashSet<>();
+    private List<User> userList = new ArrayList<>();
 
     public Role() {
 
     }
 
-    public Role(String id, String type, Set<User> userList) {
+    public Role(String id, String type, List<User> userList) {
         this.id = id;
         this.type = type;
         this.userList = userList;
+    }
+
+    public Role(String id, String type) {
+        this.id = id;
+        this.type = type;
     }
 
     public String getId() {
@@ -38,11 +45,11 @@ public class Role {
         this.type = type;
     }
 
-    public Set<User> getUserList() {
+    public List<User> getUserList() {
         return userList;
     }
 
-    public void setUserList(Set<User> userList) {
+    public void setUserList(List<User> userList) {
         this.userList = userList;
     }
 
