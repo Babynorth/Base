@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: com.strongit.iss:struts2-codebehind-plugin:2.1.2">
     <CLASSES>
-      <root url="jar:///Library/software/maven/repository/com/strongit/iss/struts2-codebehind-plugin/2.1.2/struts2-codebehind-plugin-2.1.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/strongit/iss/struts2-codebehind-plugin/2.1.2/struts2-codebehind-plugin-2.1.2.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar:///Library/software/maven/repository/com/strongit/iss/struts2-codebehind-plugin/2.1.2/struts2-codebehind-plugin-2.1.2-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/strongit/iss/struts2-codebehind-plugin/2.1.2/struts2-codebehind-plugin-2.1.2-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar:///Library/software/maven/repository/com/strongit/iss/struts2-codebehind-plugin/2.1.2/struts2-codebehind-plugin-2.1.2-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/strongit/iss/struts2-codebehind-plugin/2.1.2/struts2-codebehind-plugin-2.1.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

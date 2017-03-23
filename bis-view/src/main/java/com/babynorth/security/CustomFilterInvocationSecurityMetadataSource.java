@@ -7,12 +7,15 @@ import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
+import org.springframework.security.web.util.AntPathRequestMatcher;
+import org.springframework.security.web.util.RequestMatcher;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.*;
 
 /**
+ * 主要责任就是当访问一个url时返回这个url所需要的访问权限
  * Created by babynorth on 2017/3/13.
  */
 public class CustomFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
@@ -24,48 +27,47 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
     private Map<String, Collection<ConfigAttribute>> resourceMap;
 
 
+    /**
+     * 返回本次访问需要的权限 d当你在security.xml 配置为none将不会在被拦截
+     * @param object
+     * @return
+     * @throws IllegalArgumentException
+     */
     @Override
     public Collection<ConfigAttribute> getAttributes(Object object) throws IllegalArgumentException {
-        //取得ServletPath,即contextPath之后？号之前的部分
-        String url = ((FilterInvocation) object).getHttpRequest().getServletPath();
+        FilterInvocation fi = (FilterInvocation) object;
+        String url = fi.getRequestUrl();
+        System.err.println(url);
+        Map<String, Collection<ConfigAttribute>> resourceMap = autoRefreshResourceMap();
 
-        //取得要通过此权限需要的code集合
-        Collection<ConfigAttribute> ca = resourceMap.get(url.replace(".action", ""));
-
-        if(ca == null) {
-            List l = new ArrayList<>();
-            l.add(new SecurityConfig("not found"));
-            return l;
-        }
-
-        return ca;
+        return resourceMap.get(url);
     }
 
-    /**
-     *初始化后执行一次，以后quartz轮询执行
-     */
     @PostConstruct
-    public void autoRefreshResourceMap() {
+    public Map<String, Collection<ConfigAttribute>> autoRefreshResourceMap() {
         Map<String, Collection<ConfigAttribute>> map = new HashMap<>();
 
-       /* Map<String, String> configMap = moduleService.getResourcesConfig();*/
+      /*  Map<String, String> configMap = moduleService.getResourcesConfig();*/
         Map<String, String> configMap = new HashMap<>();
-
+        configMap.put("/test!test","/test!test");
+        configMap.put("11","/login/login!main.action");
         Collection<ConfigAttribute> list = null;
         String[] vals = null;
-        for (String key : configMap.keySet()) {
-            list = Lists.newArrayList();
-            vals = configMap.get(key).split(",");
+
+        for (Map.Entry<String,String> entry : configMap.entrySet()) {
+            list = new ArrayList<ConfigAttribute>();
+            vals = entry.getValue().split(",");
             for (String val : vals) {
                 ConfigAttribute config = new SecurityConfig(val);
                 list.add(config);
             }
-
-            map.put(key, list);
+            map.put(entry.getKey(), list);
         }
 
-        resourceMap = map;
+        return map;
     }
+
+
 
     @Override
     public Collection<ConfigAttribute> getAllConfigAttributes() {

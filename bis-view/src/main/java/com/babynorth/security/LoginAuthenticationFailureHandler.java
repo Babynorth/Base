@@ -3,6 +3,7 @@ package com.babynorth.security;
 
 import com.babynorth.util.Utils;
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.Session;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -10,6 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 
@@ -39,7 +41,8 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
         String userName = request.getParameter(username);
         if(userName != null){
             if(!userName.toLowerCase().equals("zhengbei")){
-                result = "登录失败：用户名不存在！";
+                /*result = "登录失败：用户名不存在！";*/
+                result = "noYh";
             }
             //捕捉登录异常
             if (ae != null) {
@@ -71,8 +74,10 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
             String ip = Utils.getClientIp(request);
         }
         param = param + "&leftTimes=" + leftTimes;
+        HttpSession session = request.getSession();
+        session.setAttribute("result",result);
 
-        response.sendRedirect(request.getContextPath()+url+param);
+        response.sendRedirect(request.getContextPath()+url);
 
     }
 
