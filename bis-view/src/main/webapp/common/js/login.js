@@ -9,7 +9,7 @@ if (self != top) {
 }
 
 $(function () {
-	
+
     // 得到焦点
     $("#password").focus(function () {
         $("#left_hand").animate({
@@ -41,34 +41,9 @@ $(function () {
         $("#right_hand").attr("style", "right:-112px;top:-12px");
     });
 
-    $(".span_right_second_a").click(function() {
-       login();
-        submitForm();
-
-    });
 
 });
-function login() {
-    showMsg();
-    return false;
-    $.ajax({
-        async:false,
-        type: 'POST',
-        dataType : "text",
-        url: '${baseUrl}/test!test',
-        error: function () {
-            alert('请求失败');
-        },
-        success:function(data){
-            showMsg();
-        }
-    });
-}
 
-
-function submitForm(){
-    $('#loginform').submit();
-}
 function clearForm(){
     $('#loginform').form('clear');
 }

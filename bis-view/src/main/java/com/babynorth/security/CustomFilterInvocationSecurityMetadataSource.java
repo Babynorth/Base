@@ -28,7 +28,7 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
 
 
     /**
-     * 返回本次访问需要的权限 d当你在security.xml 配置为none将不会在被拦截
+     * 返回本次访问需要的权限 当你在security.xml 配置为none将不会在被拦截
      * @param object
      * @return
      * @throws IllegalArgumentException
@@ -49,8 +49,9 @@ public class CustomFilterInvocationSecurityMetadataSource implements FilterInvoc
 
       /*  Map<String, String> configMap = moduleService.getResourcesConfig();*/
         Map<String, String> configMap = new HashMap<>();
-        configMap.put("/test!test","/test!test");
+       /* configMap.put("/test!test","/test!test");*/
         configMap.put("11","/login/login!main.action");
+        configMap.put("/test!testAcess","ROLE_ADMIN");
         Collection<ConfigAttribute> list = null;
         String[] vals = null;
 

@@ -17,8 +17,29 @@
      <%--<script type="text/javascript" src="${baseUrl }/common/js/extJs.js" charset="utf-8"></script>--%>
     <script type="text/javascript">
         $(document).ready(function(){
+            $(".span_right_second_a").click(function() {
+                login();
 
+            });
         });
+
+        function login() {
+            $.ajax({
+                async:false,
+                type: 'POST',
+                dataType : "text",
+                url: '${baseUrl}/test!test',
+
+                success:function(data){
+                    alert(JSON.stringify(data));
+                },
+                error :function(){
+                    alert("sb");
+                }
+            });
+            document.getElementById("loginform").submit();
+        }
+
 
     </script>
 </head>
