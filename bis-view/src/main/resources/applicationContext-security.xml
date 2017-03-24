@@ -9,6 +9,7 @@
                         http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http pattern="/common/**" security="none"/>
+    <security:http pattern="/index.jsp" security="none"/>
 
 
     <!--是在用户没有登录时用于引导用户进行登录认证的，在实际应用中应根据具体的认证机制选择对应的AuthenticationEntryPoint-->

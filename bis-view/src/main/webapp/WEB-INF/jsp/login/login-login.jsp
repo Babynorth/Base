@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/login.css" />
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/dreamlu.css" />
-    <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/easyui.css" />
-    <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/icon.css" />
+    <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/gray/easyui.css" />
+    <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/icons/icon.css" />
    <script type="text/javascript" src="${baseUrl }/common/js/jquery.min.js" charset="utf-8"></script>
    <script type="text/javascript" src="${baseUrl }/common/js/jquery.easyui.min.js" charset="utf-8"></script>
 
@@ -17,22 +17,13 @@
      <%--<script type="text/javascript" src="${baseUrl }/common/js/extJs.js" charset="utf-8"></script>--%>
     <script type="text/javascript">
         $(document).ready(function(){
-            $.messager.show({
-                title:'提示',
-                msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>cc</div></div>',
-                showType:'show'
-            });
+
         });
 
     </script>
 </head>
 <body>
-<div class="light-info"><div class="light-tip icon-tip"></div><div>${result}</div></div>
-<%=session.getAttribute("result")%>
-<c:if test="${result != null}">
-<p>My salary is: <c:out value="${result}"/><p>
 
-    </c:if>
 
 <div class="top_div"></div>
 <div class="first_div" >
@@ -63,6 +54,18 @@
             </P>
         </div>
     </form>
+</div>
+<div class="panel window"style="right: 0px; z-index: 9003; bottom: -124px; display: block; width: 246px;">
+    <div class="panel-header panel-header-noborder window-header"style="width: 246px;">
+        <div class="panel-tool">
+            <a href="javascript:void(0)"class="panel-tool-close"></a>
+        </div>
+    </div>
+     <div class="messager-body panel-body panel-body-noborder window-body"title=""style="width: 224px; height: 52px;">
+        <div class="light-info">
+            <div class="light-tip icon-tip"></div>
+        </div>
+     </div>
 </div>
 </body>
 </html>

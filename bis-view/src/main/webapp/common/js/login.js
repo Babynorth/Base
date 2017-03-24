@@ -49,6 +49,8 @@ $(function () {
 
 });
 function login() {
+    showMsg();
+    return false;
     $.ajax({
         async:false,
         type: 'POST',
@@ -79,11 +81,11 @@ function enterlogin(){
     }
 }
 
-function showMsg(msg) {
-    top.window.$.messager.show({
-        title: '提示',
-        msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>'+ "消息内容！" + '</div></div>',
-        timeout: 3000,
-        showType: 'slide'
+function showMsg() {
+    $.messager.show({
+        title:'提示',
+        msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>cc</div></div>',
+        showType:'show',
+        timeout: 5000
     });
 }
