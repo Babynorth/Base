@@ -33,6 +33,10 @@
                 <span class="p_logo"></span>
                 <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码" value="" />
             </P>
+            <P style="padding: 10px 0px 10px; position: relative;">
+                <input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
+                <img id="captcha" alt="验证码" src="/captcha.jpg" data-src="/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:94.5px;height:35px;cursor:pointer;">
+            </P>
             <div class="third_div">
                 <P class="third_p">
                     <span class="span_left">
