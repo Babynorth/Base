@@ -7,6 +7,7 @@
     <title>用户登录</title>
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/login.css" />
+    <%--<link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/captcha.css" />--%>
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/css/dreamlu.css" />
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/gray/easyui.css" />
     <link rel="stylesheet" type="text/css" href="${baseUrl}/common/themes/icons/icon.css" />
@@ -15,6 +16,11 @@
 
     <script type="text/javascript" src="${baseUrl }/common/js/login.js" charset="utf-8"></script>
      <%--<script type="text/javascript" src="${baseUrl }/common/js/extJs.js" charset="utf-8"></script>--%>
+<style type="text/css">
+
+
+
+</style>
     <body>
 
     <div class="top_div"></div>
@@ -33,9 +39,9 @@
                 <span class="p_logo"></span>
                 <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码" value="" />
             </P>
-            <P style="padding: 10px 0px 10px; position: relative;">
+            <P class="fir_captcha">
                 <input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
-                <img id="captcha" alt="验证码" src="/captcha.jpg" data-src="/captcha.jpg?t=" style="vertical-align:middle;border-radius:4px;width:94.5px;height:35px;cursor:pointer;">
+                <img id="captcha" alt="验证码" src=""  style="vertical-align:middle;border-radius:4px;width:94.5px;height:35px;cursor:pointer;">
             </P>
             <div class="third_div">
                 <P class="third_p">
