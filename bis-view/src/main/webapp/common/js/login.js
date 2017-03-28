@@ -56,11 +56,4 @@ function enterlogin(){
     }
 }
 
-function showMsg() {
-    $.messager.show({
-        title:'提示',
-        msg:'<div class="light-info"><div class="light-tip icon-tip"></div><div>cc</div></div>',
-        showType:'show',
-        timeout: 5000
-    });
-}
+

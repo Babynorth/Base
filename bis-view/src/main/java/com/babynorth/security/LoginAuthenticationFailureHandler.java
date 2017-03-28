@@ -1,9 +1,9 @@
 package com.babynorth.security;
 
 
+import com.babynorth.common.PropertiesUtils;
+import com.babynorth.constant.Constant;
 import com.babynorth.util.Utils;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.Session;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -11,7 +11,6 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 
@@ -34,23 +33,21 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException ae) throws IOException, ServletException {
 
-        String result = "";
+        String code = "";
         String param = "";
         int leftTimes = 4;
         //获取登录用户名
         String userName = request.getParameter(username);
         if(userName != null){
             if(!userName.toLowerCase().equals("zhengbei")){
-                /*result = "登录失败：用户名不存在！";*/
-                result = "noYh";
+                code = Constant.LOGIN_ERR_INFO_NAME;
             }
             //捕捉登录异常
             if (ae != null) {
                 // 获取到的异常为用户登录超过次数限制
                 if (ae instanceof InternalAuthenticationServiceException &&
                         ae.getMessage().indexOf("User Login Failed Times Limit") != -1) {
-
-                    result = "登录失败：用户连续登录失败次数已达上限！";
+                        code  = Constant.LOGIN_ERR_INFO_COUNT;
 
                     // 跳转到登录页所需参数
                     param = "&failTimesLimit=" + loginFailTimesLimit + "&attempDelay=" + attempDelay;
@@ -74,10 +71,9 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
             String ip = Utils.getClientIp(request);
         }
         param = param + "&leftTimes=" + leftTimes;
-        HttpSession session = request.getSession();
-        session.setAttribute("result",result);
 
-        response.sendRedirect(request.getContextPath()+url);
+
+        response.sendRedirect(request.getContextPath() + url + code + param);
 
     }
 

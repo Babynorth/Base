@@ -34,7 +34,7 @@
     </bean>
 
     <bean id="failureHandler" class="com.babynorth.security.LoginAuthenticationFailureHandler">
-        <property name="url" value="/login/login!main.action"></property>
+        <property name="url" value="/login/login!main.action?error="></property>
         <property name="username" value="username"></property>
     </bean>
 
