@@ -35,7 +35,7 @@
         </P>
         <P class="fir_captcha">
              <input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
-             <img id="captcha" alt="验证码" src=""  style="vertical-align:middle;border-radius:4px;width:94.5px;height:35px;cursor:pointer;">
+              <img id="captcha" alt="验证码" src="${baseUrl}/captcha/captchaImage!execute" title="看不清？换一张" class="img">
          </P>
         <div class="form_sec_div">
             <P class="form_thir_p">

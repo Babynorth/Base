@@ -10,6 +10,8 @@
 
     <security:http pattern="/common/**" security="none"/>
     <security:http pattern="/index.jsp" security="none"/>
+    <security:http pattern="/captcha/captchaImage!execute" security="none"/>
+
 
 
     <!--是在用户没有登录时用于引导用户进行登录认证的，在实际应用中应根据具体的认证机制选择对应的AuthenticationEntryPoint-->
@@ -37,30 +39,6 @@
         <property name="url" value="/login/login!main.action?error="></property>
         <property name="username" value="username"></property>
     </bean>
-
-
-        <!--自定义过滤器放在FilterSecurityInterceptor过滤器的前面-->
-        <!--<security:custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"></security:custom-filter>-->
-       <!--<security:custom-filter ref="exceptionTranslationFilter" after="EXCEPTION_TRANSLATION_FILTER"/>-->
-
-
-    <!--<security:http entry-point-ref="myAuthenticationEntryPoint">
-        <security:logout delete-cookies="JSESSIONID" />
-        <security:intercept-url pattern="/login*.jsp*"
-                                access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/**" access="ROLE_USER" />
-        &lt;!&ndash; 添加自己定义的AuthenticationFilter到FilterChain的FORM_LOGIN_FILTER位置 &ndash;&gt;
-        <security:custom-filter ref="authenticationFilter" position="FORM_LOGIN_FILTER"/>
-    </security:http>-->
-
-    <!-- 认证过滤器 -->
-    <!--<bean id="authenticationFilter"
-          class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">
-        <property name="authenticationManager" ref="authenticationManager" />
-        <property name="usernameParameter" value="username"/>
-        <property name="passwordParameter" value="password"/>
-    </bean>-->
-
 
    <bean id="exceptionTranslationFilter"
           class="org.springframework.security.web.access.ExceptionTranslationFilter">
@@ -94,20 +72,13 @@
 
     <bean id="accessDecisionManager" class="com.babynorth.security.MyAccessDecisionManager"></bean>
 
-    <!--<security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="zhengbei" password="123456" authorities="ROLE_ADMIN"></security:user>
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager>-->
 
     <!--动态用户-->
    <security:authentication-manager alias="authenticationManager">
         <security:authentication-provider user-service-ref="customUserDetailsService"/>
    </security:authentication-manager>
 
-    <bean id="customUserDetailsService" class="com.babynorth.security.CustomUserDetailsService" ></bean>
-    <!--基于角色登录  authentication-success-handler-ref="customSuccessHandler" 放在form-login里-->
-    <bean id="customSuccessHandler" class="com.babynorth.security.CustomSuccessHandler" ></bean>
+   <bean id="customUserDetailsService" class="com.babynorth.security.CustomUserDetailsService" ></bean>
+
+
 </beans>
