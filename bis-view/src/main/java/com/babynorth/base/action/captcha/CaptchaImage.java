@@ -3,6 +3,8 @@ package com.babynorth.base.action.captcha;
 import com.babynorth.base.action.BaseAction;
 import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.Resource;
@@ -21,8 +23,6 @@ public class CaptchaImage extends BaseAction {
 
     public static final String CAPTCHA_IMAGE_FORMAT = "jpeg";
 
-    @Resource(name="jcaptchaService")
-    private ImageCaptchaService jcaptchaService;
 
     public CaptchaImage() {
 
@@ -30,6 +30,13 @@ public class CaptchaImage extends BaseAction {
 
 
     public String execute() throws Exception {
+
+        ApplicationContext cxt = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        //属性注入必须要有setter
+        ImageCaptchaService jcaptchaService = (ImageCaptchaService)cxt.getBean("jcaptchaService");
+
+
 
         HttpServletRequest request = getRequest();
         HttpServletResponse response = getResponse();
@@ -56,16 +63,6 @@ public class CaptchaImage extends BaseAction {
 
 
         return null;
-    }
-    public void setJcaptchaService(DefaultManageableImageCaptchaService jcaptchaService) {
-        this.jcaptchaService = jcaptchaService;
-    }
-
-    public void afterPropertiesSet() throws Exception {
-        if (jcaptchaService == null)
-            throw new RuntimeException("Image captcha service wasn`t set!");
-        else
-            return;
     }
 
 
