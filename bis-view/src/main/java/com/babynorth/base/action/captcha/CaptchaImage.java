@@ -32,6 +32,7 @@ public class CaptchaImage extends BaseAction {
         HttpServletResponse response = getResponse();
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
         ImageCaptchaService jcaptchaService = (ImageCaptchaService) ctx.getBean("jcaptchaService");
+
         System.out.println(jcaptchaService);
 
         byte captchaChallengeAsJpeg[] = (byte[]) null;
