@@ -1,11 +1,10 @@
 package com.babynorth.base.action.captcha;
 
 import com.babynorth.base.action.BaseAction;
-import com.octo.captcha.service.image.DefaultManageableImageCaptchaService;
 import com.octo.captcha.service.image.ImageCaptchaService;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
-
-import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +20,6 @@ public class CaptchaImage extends BaseAction {
 
     public static final String CAPTCHA_IMAGE_FORMAT = "jpeg";
 
-    @Resource(name="jcaptchaService")
-    private ImageCaptchaService jcaptchaService;
 
     public CaptchaImage() {
 
@@ -33,6 +30,8 @@ public class CaptchaImage extends BaseAction {
 
         HttpServletRequest request = getRequest();
         HttpServletResponse response = getResponse();
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ImageCaptchaService jcaptchaService = (ImageCaptchaService) ctx.getBean("jcaptchaService");
         System.out.println(jcaptchaService);
 
         byte captchaChallengeAsJpeg[] = (byte[]) null;
@@ -56,16 +55,6 @@ public class CaptchaImage extends BaseAction {
 
 
         return null;
-    }
-    public void setJcaptchaService(DefaultManageableImageCaptchaService jcaptchaService) {
-        this.jcaptchaService = jcaptchaService;
-    }
-
-    public void afterPropertiesSet() throws Exception {
-        if (jcaptchaService == null)
-            throw new RuntimeException("Image captcha service wasn`t set!");
-        else
-            return;
     }
 
 
