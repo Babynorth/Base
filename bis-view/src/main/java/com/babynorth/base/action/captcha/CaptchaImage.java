@@ -1,5 +1,6 @@
 package com.babynorth.base.action.captcha;
 
+
 import com.babynorth.base.action.BaseAction;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import org.springframework.context.ApplicationContext;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
+
 
 /**
  * Created by Administrator on 2017/3/29 0029.
@@ -38,7 +40,6 @@ public class CaptchaImage extends BaseAction {
         HttpServletRequest request = getRequest();
         HttpServletResponse response = getResponse();
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-        ImageCaptchaService jcaptchaService = (ImageCaptchaService) ctx.getBean("jcaptchaService");
 
         System.out.println(jcaptchaService);
 

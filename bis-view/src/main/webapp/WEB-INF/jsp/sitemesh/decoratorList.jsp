@@ -24,7 +24,7 @@
     <apan class="site_info">
         郑北&nbsp;|
         <span id="_dtp"></span>
-        <a href="${path}/login/login!logout.action">退出</a>
+        <a href="${baseUrl}/j_spring_security_logout">退出</a>
     </apan>
     <div class="w t_cen">
         <div class="t_c_logo"><a href="index.html"><img src="${baseUrl}/theme/images/logo.png" /></a></div>

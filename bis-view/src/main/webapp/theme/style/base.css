@@ -68,10 +68,14 @@ a:hover img.opacity { filter:alpha(opacity=80); opacity:0.8; -moz-opacity:0.8; }
     color:#acacac;
     margin-right:125px;
     margin-top:25px;
-    font-size:20px;
+    font-size:15px;
 }
 .top .site_info a,.top .site_info a:link{
     color:#acacac;
+    text-decoration: none;
+}
+.top .site_info a:hover{
+    color:#cd0000;
     text-decoration: none;
 }
 
