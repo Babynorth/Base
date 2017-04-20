@@ -34,7 +34,7 @@
             <input class="ipt" id="password" type="password" name="password" placeholder="请输入密码" value="" />
         </P>
         <P class="fir_captcha">
-             <input class="captcha" type="text" name="captcha" placeholder="请输入验证码"/>
+             <input class="captcha" type="text" name="captcha" placeholder="请输入验证码" onkeypress="enter()" id="j_captcha" />
               <img id="captcha" alt="验证码" src="${baseUrl}/captcha/captchaImage!execute" title="看不清？换一张" class="img">
          </P>
         <div class="form_sec_div">
@@ -73,34 +73,72 @@
                 login();
 
             });
+
+            //更换验证码
+            $("#captcha").click(function(e) {
+                changeCaptcha(e.target);
+            });
             showMsg();
 
         });
 
+        function changeCaptcha(obj){
+            obj.src = "${baseUrl}/captcha/captchaImage!execute?d=" +  new Date();
+        }
+
         function login() {
+            var captcha = $("#j_captcha").val();
+            if(captcha == "") {
+                showMsg(captcha);
+                return false;
+            }
+            var captchaFlag = false;
             $.ajax({
                 async:false,
                 type: 'POST',
                 dataType : "text",
-                url: '${baseUrl}/test!test',
+                url: '${baseUrl}/test!test1?captcha=' + captcha ,
 
                 success:function(data){
-
+                    captchaFlag = data;
+                    if(captchaFlag == "false") {
+                        changeCaptcha(document.getElementById("captcha"));
+                        showMsg(captchaFlag);
+                    }
                 },
                 error :function(){
-                    alert(123);
+                    alert("系统异常请联系管理员！");
                 }
             });
-            document.getElementById("loginform").submit();
+
+           if(captchaFlag != "false"){
+               document.getElementById("loginform").submit();
+           } else {
+               return captchaFlag;
+           }
+
         }
 
-        function showMsg() {
+        function showMsg(obj) {
             var error = '${param.error}';
             var html = '';
 
+            if(obj == ""){
+                html = '<div class="light-info"><div class="light-tip icon-tip"></div><div>验证码不能为空，请输入验证码！</div></div>';
+                $.messager.show({
+                    title:'提示',
+                    msg:html,
+                    showType:'show',
+                    timeout: 5000
+                });
+            }
             if(error != "") {
                 if(error == "1") {
                     html = '<div class="light-info"><div class="light-tip icon-tip"></div><div>用户不存在！</div></div>';
+                }
+                error = obj;
+                if(error == "false") {
+                    html = '<div class="light-info"><div class="light-tip icon-tip"></div><div>验证码错误,请重新输入！</div></div>';
                 }
                 $.messager.show({
                     title:'提示',
@@ -110,6 +148,15 @@
                 });
             }
         }
+
+        //按回车键查询
+        function enter() {
+            if(event.keyCode == "13") {
+                login();
+            }
+
+        }
+
 
 
     </script>

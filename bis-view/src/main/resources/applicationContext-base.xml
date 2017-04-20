@@ -197,9 +197,6 @@
 
     <!--验证码end-->
 
-    <bean id="helloWorld" class="com.babynorth.base.action.captcha.HelloWorld">
-        <property name="name" value="Spring1"></property>
-    </bean>
 
 
 </beans>

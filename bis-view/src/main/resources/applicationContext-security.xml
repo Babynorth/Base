@@ -9,6 +9,7 @@
                         http://www.springframework.org/schema/security/spring-security.xsd">
 
     <security:http pattern="/common/**" security="none"/>
+    <security:http pattern="/theme/**" security="none"/>
     <security:http pattern="/index.jsp" security="none"/>
     <security:http pattern="/captcha/captchaImage!execute" security="none"/>
 
